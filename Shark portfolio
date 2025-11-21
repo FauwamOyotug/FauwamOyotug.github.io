@@ -25,7 +25,7 @@
     
     body {
       font-family: 'Nunito', sans-serif;
-      background: linear-gradient(180deg, #0c2461 0%, #1e3799 30%, #0984e3 60%, #00cec9 100%);
+      background: linear-gradient(180deg, #87CEEB 0%, #00cec9 15%, #0984e3 35%, #1e3799 55%, #0c2461 75%, #050a30 90%, #000 100%);
       min-height: 100vh;
       color: white;
       overflow-x: hidden;
@@ -239,6 +239,240 @@
       box-shadow: 0 15px 40px rgba(0,206,201,0.5);
     }
     
+    /* MINI GAME STYLES */
+    .game-container {
+      width: 100%;
+      max-width: 500px;
+      margin: 30px auto;
+      background: rgba(0,0,0,0.4);
+      border-radius: 20px;
+      padding: 15px;
+      border: 3px solid var(--aqua);
+    }
+    
+    .game-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 10px;
+      flex-wrap: wrap;
+      gap: 10px;
+    }
+    
+    .game-title {
+      font-family: 'Fredoka One', cursive;
+      font-size: 1.2rem;
+      color: var(--aqua);
+    }
+    
+    .game-stats {
+      display: flex;
+      gap: 15px;
+      font-size: 0.9rem;
+    }
+    
+    .game-arena {
+      position: relative;
+      width: 100%;
+      height: 300px;
+      background: linear-gradient(180deg, #0984e3 0%, #0c2461 100%);
+      border-radius: 15px;
+      overflow: hidden;
+      cursor: none;
+    }
+    
+    .game-shark {
+      position: absolute;
+      font-size: 40px;
+      transition: left 0.1s, top 0.1s;
+      z-index: 10;
+      filter: drop-shadow(0 3px 6px rgba(0,0,0,0.4));
+    }
+    
+    .game-fish {
+      position: absolute;
+      font-size: 25px;
+      transition: transform 0.2s;
+      cursor: pointer;
+    }
+    
+    .game-fish.caught {
+      transform: scale(0) rotate(180deg);
+      opacity: 0;
+    }
+    
+    .game-start-overlay, .game-over-overlay {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: rgba(0,0,0,0.85);
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      text-align: center;
+      border-radius: 15px;
+      z-index: 20;
+    }
+    
+    .game-over-overlay {
+      display: none;
+      flex-direction: column;
+    }
+    
+    .game-btn {
+      padding: 12px 30px;
+      background: linear-gradient(135deg, var(--aqua), var(--wave));
+      color: var(--deep-blue);
+      border: none;
+      border-radius: 30px;
+      font-size: 1rem;
+      font-weight: 700;
+      cursor: pointer;
+      transition: all 0.3s;
+      font-family: 'Nunito', sans-serif;
+    }
+    
+    .game-btn:hover {
+      transform: scale(1.1);
+      box-shadow: 0 5px 20px rgba(0,206,201,0.5);
+    }
+    
+    .score-popup {
+      position: absolute;
+      font-weight: 700;
+      font-size: 1.2rem;
+      pointer-events: none;
+      animation: scoreFloat 1s forwards;
+      z-index: 15;
+    }
+    
+    @keyframes scoreFloat {
+      0% { opacity: 1; transform: translateY(0) scale(1); }
+      100% { opacity: 0; transform: translateY(-40px) scale(1.5); }
+    }
+    
+    /* CONNECT 4 STYLES */
+    .c4-container {
+      width: 100%;
+      max-width: 450px;
+      margin: 50px auto 0;
+      background: rgba(0,0,0,0.4);
+      border-radius: 20px;
+      padding: 20px;
+      border: 3px solid var(--aqua);
+    }
+    
+    .c4-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 15px;
+      flex-wrap: wrap;
+      gap: 10px;
+    }
+    
+    .c4-title {
+      font-family: 'Fredoka One', cursive;
+      font-size: 1.3rem;
+      color: var(--aqua);
+    }
+    
+    .c4-turn {
+      font-size: 1.1rem;
+      font-weight: 600;
+    }
+    
+    .c4-turn span {
+      font-size: 1.5rem;
+    }
+    
+    .c4-board {
+      display: grid;
+      grid-template-columns: repeat(7, 1fr);
+      gap: 6px;
+      background: linear-gradient(180deg, #1e3799, #0c2461);
+      padding: 12px;
+      border-radius: 15px;
+      border: 4px solid #0a1a4a;
+    }
+    
+    .c4-cell {
+      aspect-ratio: 1;
+      background: radial-gradient(circle, #0a1a4a 60%, #050d2e 100%);
+      border-radius: 50%;
+      cursor: pointer;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      font-size: 2rem;
+      transition: all 0.2s;
+      border: 2px solid #0a1a4a;
+    }
+    
+    .c4-cell:hover:not(.filled) {
+      background: radial-gradient(circle, #1a2a5a 60%, #0a1a4a 100%);
+      transform: scale(1.05);
+    }
+    
+    .c4-cell.filled {
+      cursor: default;
+    }
+    
+    .c4-cell.drop {
+      animation: dropIn 0.4s ease-out;
+    }
+    
+    @keyframes dropIn {
+      0% { transform: translateY(-200px); opacity: 0; }
+      60% { transform: translateY(10px); }
+      80% { transform: translateY(-5px); }
+      100% { transform: translateY(0); opacity: 1; }
+    }
+    
+    .c4-cell.winner {
+      animation: winPulse 0.5s ease-in-out infinite alternate;
+      box-shadow: 0 0 15px gold;
+    }
+    
+    @keyframes winPulse {
+      from { transform: scale(1); }
+      to { transform: scale(1.15); }
+    }
+    
+    .c4-message {
+      text-align: center;
+      margin: 15px 0;
+      font-size: 1.1rem;
+      font-weight: 600;
+      min-height: 30px;
+    }
+    
+    .c4-buttons {
+      display: flex;
+      justify-content: center;
+      gap: 15px;
+      flex-wrap: wrap;
+    }
+    
+    .c4-ai-btn {
+      background: linear-gradient(135deg, #6c5ce7, #a29bfe) !important;
+    }
+    
+    .c4-ai-btn.active {
+      background: linear-gradient(135deg, #00b894, #55efc4) !important;
+    }
+    
+    .c4-score {
+      display: flex;
+      justify-content: center;
+      gap: 25px;
+      margin-top: 15px;
+      font-size: 0.95rem;
+      flex-wrap: wrap;
+    }
+    
     /* Wave divider */
     .wave-divider {
       height: 100px;
@@ -420,7 +654,22 @@
       transition: all 0.3s;
       cursor: pointer;
       border-left: 4px solid transparent;
+      display: flex;
+      align-items: center;
+      gap: 20px;
     }
+    
+    .zone-emoji {
+      font-size: 50px;
+      flex-shrink: 0;
+      transition: all 0.3s;
+    }
+    
+    .zone:hover .zone-emoji {
+      transform: scale(1.2) rotate(10deg);
+    }
+    
+    .zone-content { flex: 1; }
     
     .zone:hover {
       background: rgba(255,255,255,0.1);
@@ -508,6 +757,7 @@
     .contact-shark {
       font-size: 100px;
       animation: contactSwim 4s ease-in-out infinite;
+      margin-bottom: 20px;
     }
     
     @keyframes contactSwim {
@@ -592,11 +842,14 @@
   <!-- Bubbles Container -->
   <div class="bubbles" id="bubbles"></div>
   
-  <!-- Swimming Fish -->
+  <!-- Swimming Fish & Sharks -->
   <div class="fish" style="top:20%;animation-duration:15s">🐠</div>
   <div class="fish" style="top:40%;animation-duration:20s;animation-delay:3s">🐡</div>
+  <div class="fish" style="top:55%;animation-duration:25s;animation-delay:8s">🦈</div>
   <div class="fish" style="top:70%;animation-duration:18s;animation-delay:7s">🐟</div>
   <div class="fish" style="top:85%;animation-duration:25s;animation-delay:2s">🦑</div>
+  <div class="fish" style="top:15%;animation-duration:30s;animation-delay:12s">🐙</div>
+  <div class="fish" style="top:75%;animation-duration:22s;animation-delay:5s">🐳</div>
   
   <!-- Depth Meter -->
   <div class="depth-meter">
@@ -627,6 +880,37 @@
     <h1 class="welcome-title">I'm <span>Finn</span> the Dev!</h1>
     <p class="welcome-subtitle">Full-Stack Developer | Ocean Explorer | Code Predator 🌊</p>
     <p class="typing-text" id="typingText"></p>
+    
+    <!-- MINI GAME -->
+    <div class="game-container" id="gameContainer">
+      <div class="game-header">
+        <div class="game-title">🎮 SHARK CHOMP!</div>
+        <div class="game-stats">
+          <span>🐟 Score: <strong id="gameScore">0</strong></span>
+          <span>⏱️ Time: <strong id="gameTime">30</strong>s</span>
+          <span>❤️ Lives: <strong id="gameLives">3</strong></span>
+        </div>
+      </div>
+      <div class="game-arena" id="gameArena">
+        <div class="game-shark" id="gameShark">🦈</div>
+        <div class="game-start-overlay" id="gameOverlay">
+          <div class="game-start-text">
+            <div style="font-size:60px;margin-bottom:15px">🦈</div>
+            <div style="font-size:1.5rem;font-weight:700">SHARK CHOMP!</div>
+            <div style="margin:10px 0;opacity:0.9">Use arrow keys or WASD to move<br>Eat fish 🐟 to score points!<br>Avoid jellyfish 🪼 or lose lives!</div>
+            <button class="game-btn" onclick="startGame()">START GAME</button>
+          </div>
+        </div>
+        <div class="game-over-overlay" id="gameOverScreen">
+          <div style="font-size:60px;margin-bottom:15px">🏆</div>
+          <div style="font-size:1.5rem;font-weight:700">GAME OVER!</div>
+          <div style="margin:15px 0">Final Score: <strong id="finalScore">0</strong></div>
+          <div id="highScoreText" style="color:var(--sand);margin-bottom:15px"></div>
+          <button class="game-btn" onclick="startGame()">PLAY AGAIN</button>
+        </div>
+      </div>
+    </div>
+    
     <a href="#projects" class="cta-btn">Dive Into Projects 🤿</a>
   </section>
   
@@ -649,14 +933,14 @@
         </div>
       </a>
       <a href="https://github.com" target="_blank" class="project-card">
-        <div class="project-img" style="background:linear-gradient(135deg,#6c5ce7,#a29bfe)">🐙</div>
+        <div class="project-img" style="background:linear-gradient(135deg,#6c5ce7,#a29bfe)">🦈</div>
         <div class="project-info">
-          <h3>Octo-Tasks</h3>
-          <p>8-armed productivity app! Manage multiple projects with tentacle-like efficiency.</p>
+          <h3>Shark Spotter</h3>
+          <p>AI-powered shark detection app for beach safety. Uses computer vision to keep swimmers safe!</p>
           <div class="project-tags">
-            <span class="tag">Vue.js</span>
-            <span class="tag">Firebase</span>
-            <span class="tag">PWA</span>
+            <span class="tag">Python</span>
+            <span class="tag">TensorFlow</span>
+            <span class="tag">OpenCV</span>
           </div>
         </div>
       </a>
@@ -666,9 +950,9 @@
           <h3>Turtle Tracker</h3>
           <p>Conservation app tracking sea turtle migrations using satellite data and ML predictions.</p>
           <div class="project-tags">
-            <span class="tag">Python</span>
-            <span class="tag">TensorFlow</span>
+            <span class="tag">Vue.js</span>
             <span class="tag">MapBox</span>
+            <span class="tag">Firebase</span>
           </div>
         </div>
       </a>
@@ -680,24 +964,36 @@
     <h2 class="section-title">🤿 Deep <span>Dive</span> Into Me</h2>
     <div class="ocean-zones">
       <div class="zone" onclick="this.classList.toggle('expanded')">
-        <div class="zone-depth">☀️ SUNLIGHT ZONE — 0-200m</div>
-        <h3>🏄 The Beginning (2019)</h3>
-        <p>Caught my first wave into coding! Started with HTML & CSS, thought &lt;blink&gt; was the coolest tag ever. We all start somewhere!</p>
+        <div class="zone-emoji">🐠</div>
+        <div class="zone-content">
+          <div class="zone-depth">☀️ SUNLIGHT ZONE — 0-200m</div>
+          <h3>🏄 The Beginning (2019)</h3>
+          <p>Caught my first wave into coding! Started with HTML & CSS, thought &lt;blink&gt; was the coolest tag ever. We all start somewhere!</p>
+        </div>
       </div>
       <div class="zone">
-        <div class="zone-depth">🌅 TWILIGHT ZONE — 200-1000m</div>
-        <h3>🐠 Learning the Currents (2020)</h3>
-        <p>Dove deeper into JavaScript. Discovered React and realized the ocean of web dev is VAST. Survived callback hell!</p>
+        <div class="zone-emoji">🐡</div>
+        <div class="zone-content">
+          <div class="zone-depth">🌅 TWILIGHT ZONE — 200-1000m</div>
+          <h3>🐠 Learning the Currents (2020)</h3>
+          <p>Dove deeper into JavaScript. Discovered React and realized the ocean of web dev is VAST. Survived callback hell!</p>
+        </div>
       </div>
       <div class="zone">
-        <div class="zone-depth">🌑 MIDNIGHT ZONE — 1000-4000m</div>
-        <h3>🦑 Backend Adventures (2022)</h3>
-        <p>Explored the dark depths of servers, databases, and APIs. Befriended Node.js and MongoDB. No sunlight, just terminal glow.</p>
+        <div class="zone-emoji">🦑</div>
+        <div class="zone-content">
+          <div class="zone-depth">🌑 MIDNIGHT ZONE — 1000-4000m</div>
+          <h3>🦑 Backend Adventures (2022)</h3>
+          <p>Explored the dark depths of servers, databases, and APIs. Befriended Node.js and MongoDB. No sunlight, just terminal glow.</p>
+        </div>
       </div>
       <div class="zone">
-        <div class="zone-depth">🔱 ABYSSAL ZONE — 4000m+</div>
-        <h3>🦈 Apex Developer (Now)</h3>
-        <p>Now I'm the shark of the codebase! Leading projects, mentoring fish, and hunting bugs with precision. Fear my git commits!</p>
+        <div class="zone-emoji">🦈</div>
+        <div class="zone-content">
+          <div class="zone-depth">🔱 ABYSSAL ZONE — 4000m+</div>
+          <h3>🦈 Apex Developer (Now)</h3>
+          <p>Now I'm the shark of the codebase! Leading projects, mentoring fish, and hunting bugs with precision. Fear my git commits!</p>
+        </div>
       </div>
     </div>
   </section>
@@ -712,6 +1008,25 @@
       <a href="https://twitter.com" target="_blank" class="social-link" title="Twitter"><i class="fab fa-twitter"></i></a>
       <a href="https://instagram.com" target="_blank" class="social-link" title="Instagram"><i class="fab fa-instagram"></i></a>
       <a href="https://youtube.com" target="_blank" class="social-link" title="YouTube"><i class="fab fa-youtube"></i></a>
+    </div>
+    
+    <!-- CONNECT 4 FISH GAME -->
+    <div class="c4-container">
+      <div class="c4-header">
+        <div class="c4-title">🐟 CONNECT FOUR FISH 🐡</div>
+        <div class="c4-turn">Current Turn: <span id="c4Turn">🐟</span></div>
+      </div>
+      <div class="c4-board" id="c4Board"></div>
+      <div class="c4-message" id="c4Message">Click a column to drop your fish!</div>
+      <div class="c4-buttons">
+        <button class="game-btn" onclick="resetC4()">🔄 New Game</button>
+        <button class="game-btn c4-ai-btn" id="c4AiBtn" onclick="toggleAI()">🤖 vs AI: OFF</button>
+      </div>
+      <div class="c4-score">
+        <span>🐟 Wins: <strong id="c4P1Wins">0</strong></span>
+        <span>🐡 Wins: <strong id="c4P2Wins">0</strong></span>
+        <span>🤝 Draws: <strong id="c4Draws">0</strong></span>
+      </div>
     </div>
   </section>
   
@@ -847,6 +1162,457 @@
         document.getElementById('treasurePopup').classList.remove('show');
       }
     });
+    
+    // ============ MINI GAME ============
+    const arena = document.getElementById('gameArena');
+    const gameShark = document.getElementById('gameShark');
+    const overlay = document.getElementById('gameOverlay');
+    const gameOverScreen = document.getElementById('gameOverScreen');
+    const scoreEl = document.getElementById('gameScore');
+    const timeEl = document.getElementById('gameTime');
+    const livesEl = document.getElementById('gameLives');
+    const finalScoreEl = document.getElementById('finalScore');
+    const highScoreText = document.getElementById('highScoreText');
+    
+    let gameActive = false;
+    let score = 0;
+    let timeLeft = 30;
+    let lives = 3;
+    let highScore = 0;
+    let sharkX = 220;
+    let sharkY = 130;
+    let gameLoop, timerLoop, spawnLoop;
+    let keysPressed = {};
+    
+    function startGame() {
+      gameActive = true;
+      score = 0;
+      timeLeft = 30;
+      lives = 3;
+      sharkX = 220;
+      sharkY = 130;
+      
+      scoreEl.textContent = score;
+      timeEl.textContent = timeLeft;
+      livesEl.textContent = lives;
+      
+      overlay.style.display = 'none';
+      gameOverScreen.style.display = 'none';
+      
+      // Clear existing fish
+      document.querySelectorAll('.game-fish').forEach(f => f.remove());
+      
+      // Position shark
+      updateSharkPosition();
+      
+      // Start loops
+      gameLoop = setInterval(updateGame, 16);
+      timerLoop = setInterval(() => {
+        timeLeft--;
+        timeEl.textContent = timeLeft;
+        if (timeLeft <= 0) endGame();
+      }, 1000);
+      spawnLoop = setInterval(spawnFish, 800);
+      
+      // Spawn initial fish
+      for (let i = 0; i < 5; i++) setTimeout(() => spawnFish(), i * 200);
+    }
+    
+    function updateSharkPosition() {
+      gameShark.style.left = sharkX + 'px';
+      gameShark.style.top = sharkY + 'px';
+    }
+    
+    function updateGame() {
+      if (!gameActive) return;
+      
+      const speed = 5;
+      const arenaRect = arena.getBoundingClientRect();
+      
+      if (keysPressed['ArrowLeft'] || keysPressed['KeyA']) {
+        sharkX = Math.max(0, sharkX - speed);
+        gameShark.style.transform = 'scaleX(-1)';
+      }
+      if (keysPressed['ArrowRight'] || keysPressed['KeyD']) {
+        sharkX = Math.min(arena.offsetWidth - 50, sharkX + speed);
+        gameShark.style.transform = 'scaleX(1)';
+      }
+      if (keysPressed['ArrowUp'] || keysPressed['KeyW']) {
+        sharkY = Math.max(0, sharkY - speed);
+      }
+      if (keysPressed['ArrowDown'] || keysPressed['KeyS']) {
+        sharkY = Math.min(arena.offsetHeight - 50, sharkY + speed);
+      }
+      
+      updateSharkPosition();
+      checkCollisions();
+    }
+    
+    function spawnFish() {
+      if (!gameActive) return;
+      
+      const fish = document.createElement('div');
+      fish.className = 'game-fish';
+      
+      // 20% chance for jellyfish (bad), 15% chance for golden fish (bonus)
+      const rand = Math.random();
+      if (rand < 0.2) {
+        fish.textContent = '🪼';
+        fish.dataset.type = 'bad';
+      } else if (rand < 0.35) {
+        fish.textContent = '🐡';
+        fish.dataset.type = 'bonus';
+      } else {
+        fish.textContent = ['🐟', '🐠', '🦐', '🦀'][Math.floor(Math.random() * 4)];
+        fish.dataset.type = 'good';
+      }
+      
+      // Keep trying positions until we find one away from shark
+      let fishX, fishY;
+      let attempts = 0;
+      const safeDistance = 80;
+      
+      do {
+        fishX = Math.random() * (arena.offsetWidth - 40);
+        fishY = Math.random() * (arena.offsetHeight - 40);
+        attempts++;
+      } while (
+        Math.abs(fishX - sharkX) < safeDistance && 
+        Math.abs(fishY - sharkY) < safeDistance && 
+        attempts < 20
+      );
+      
+      fish.style.left = fishX + 'px';
+      fish.style.top = fishY + 'px';
+      
+      arena.appendChild(fish);
+      
+      // Remove after 4 seconds if not caught
+      setTimeout(() => {
+        if (fish.parentNode && !fish.classList.contains('caught')) {
+          fish.remove();
+        }
+      }, 4000);
+    }
+    
+    function checkCollisions() {
+      const sharkRect = { x: sharkX, y: sharkY, w: 45, h: 45 };
+      
+      document.querySelectorAll('.game-fish').forEach(fish => {
+        if (fish.classList.contains('caught')) return;
+        
+        const fishX = parseInt(fish.style.left);
+        const fishY = parseInt(fish.style.top);
+        const fishRect = { x: fishX, y: fishY, w: 30, h: 30 };
+        
+        if (sharkRect.x < fishRect.x + fishRect.w &&
+            sharkRect.x + sharkRect.w > fishRect.x &&
+            sharkRect.y < fishRect.y + fishRect.h &&
+            sharkRect.y + sharkRect.h > fishRect.y) {
+          
+          fish.classList.add('caught');
+          
+          if (fish.dataset.type === 'bad') {
+            lives--;
+            livesEl.textContent = lives;
+            showScorePopup(fishX, fishY, '💔 -1', '#ff7675');
+            gameShark.style.filter = 'brightness(0.5) sepia(1) hue-rotate(-50deg)';
+            setTimeout(() => gameShark.style.filter = '', 200);
+            if (lives <= 0) endGame();
+          } else if (fish.dataset.type === 'bonus') {
+            score += 25;
+            showScorePopup(fishX, fishY, '+25 🌟', '#ffeaa7');
+          } else {
+            score += 10;
+            showScorePopup(fishX, fishY, '+10', '#00cec9');
+          }
+          
+          scoreEl.textContent = score;
+          setTimeout(() => fish.remove(), 300);
+        }
+      });
+    }
+    
+    function showScorePopup(x, y, text, color) {
+      const popup = document.createElement('div');
+      popup.className = 'score-popup';
+      popup.textContent = text;
+      popup.style.left = x + 'px';
+      popup.style.top = y + 'px';
+      popup.style.color = color;
+      arena.appendChild(popup);
+      setTimeout(() => popup.remove(), 1000);
+    }
+    
+    function endGame() {
+      gameActive = false;
+      clearInterval(gameLoop);
+      clearInterval(timerLoop);
+      clearInterval(spawnLoop);
+      
+      finalScoreEl.textContent = score;
+      
+      if (score > highScore) {
+        highScore = score;
+        highScoreText.textContent = '🎉 NEW HIGH SCORE! 🎉';
+      } else {
+        highScoreText.textContent = 'High Score: ' + highScore;
+      }
+      
+      gameOverScreen.style.display = 'flex';
+    }
+    
+    // Keyboard controls
+    document.addEventListener('keydown', (e) => {
+      if (['ArrowLeft', 'ArrowRight', 'ArrowUp', 'ArrowDown', 'KeyW', 'KeyA', 'KeyS', 'KeyD'].includes(e.code)) {
+        e.preventDefault();
+        keysPressed[e.code] = true;
+      }
+    });
+    
+    document.addEventListener('keyup', (e) => {
+      keysPressed[e.code] = false;
+    });
+    
+    // ============ CONNECT 4 FISH GAME ============
+    const ROWS = 6;
+    const COLS = 7;
+    let c4Board = [];
+    let c4CurrentPlayer = 1;
+    let c4GameOver = false;
+    let c4VsAI = false;
+    let c4P1Wins = 0;
+    let c4P2Wins = 0;
+    let c4Draws = 0;
+    
+    const c4Pieces = { 1: '🐟', 2: '🐡' };
+    
+    function initC4Board() {
+      const boardEl = document.getElementById('c4Board');
+      boardEl.innerHTML = '';
+      c4Board = [];
+      
+      for (let r = 0; r < ROWS; r++) {
+        c4Board[r] = [];
+        for (let c = 0; c < COLS; c++) {
+          c4Board[r][c] = 0;
+          const cell = document.createElement('div');
+          cell.className = 'c4-cell';
+          cell.dataset.row = r;
+          cell.dataset.col = c;
+          cell.onclick = () => c4DropPiece(c);
+          boardEl.appendChild(cell);
+        }
+      }
+      
+      c4CurrentPlayer = 1;
+      c4GameOver = false;
+      document.getElementById('c4Turn').textContent = c4Pieces[1];
+      document.getElementById('c4Message').textContent = 'Click a column to drop your fish!';
+    }
+    
+    function c4DropPiece(col) {
+      if (c4GameOver) return;
+      if (c4VsAI && c4CurrentPlayer === 2) return;
+      
+      const row = c4GetLowestRow(col);
+      if (row === -1) return;
+      
+      c4PlacePiece(row, col, c4CurrentPlayer);
+      
+      if (c4CheckWin(row, col, c4CurrentPlayer)) {
+        c4GameOver = true;
+        document.getElementById('c4Message').textContent = `${c4Pieces[c4CurrentPlayer]} WINS! 🎉`;
+        if (c4CurrentPlayer === 1) {
+          c4P1Wins++;
+          document.getElementById('c4P1Wins').textContent = c4P1Wins;
+        } else {
+          c4P2Wins++;
+          document.getElementById('c4P2Wins').textContent = c4P2Wins;
+        }
+        return;
+      }
+      
+      if (c4CheckDraw()) {
+        c4GameOver = true;
+        c4Draws++;
+        document.getElementById('c4Draws').textContent = c4Draws;
+        document.getElementById('c4Message').textContent = "It's a draw! 🤝";
+        return;
+      }
+      
+      c4CurrentPlayer = c4CurrentPlayer === 1 ? 2 : 1;
+      document.getElementById('c4Turn').textContent = c4Pieces[c4CurrentPlayer];
+      document.getElementById('c4Message').textContent = `${c4Pieces[c4CurrentPlayer]}'s turn!`;
+      
+      if (c4VsAI && c4CurrentPlayer === 2) {
+        setTimeout(c4AIMove, 500);
+      }
+    }
+    
+    function c4GetLowestRow(col) {
+      for (let r = ROWS - 1; r >= 0; r--) {
+        if (c4Board[r][col] === 0) return r;
+      }
+      return -1;
+    }
+    
+    function c4PlacePiece(row, col, player) {
+      c4Board[row][col] = player;
+      const cell = document.querySelector(`.c4-cell[data-row="${row}"][data-col="${col}"]`);
+      cell.textContent = c4Pieces[player];
+      cell.classList.add('filled', 'drop');
+    }
+    
+    function c4CheckWin(row, col, player) {
+      const directions = [
+        [[0, 1], [0, -1]],
+        [[1, 0], [-1, 0]],
+        [[1, 1], [-1, -1]],
+        [[1, -1], [-1, 1]]
+      ];
+      
+      for (const [dir1, dir2] of directions) {
+        let count = 1;
+        const winCells = [[row, col]];
+        
+        for (const [dr, dc] of [dir1, dir2]) {
+          let r = row + dr;
+          let c = col + dc;
+          while (r >= 0 && r < ROWS && c >= 0 && c < COLS && c4Board[r][c] === player) {
+            count++;
+            winCells.push([r, c]);
+            r += dr;
+            c += dc;
+          }
+        }
+        
+        if (count >= 4) {
+          winCells.forEach(([r, c]) => {
+            document.querySelector(`.c4-cell[data-row="${r}"][data-col="${c}"]`).classList.add('winner');
+          });
+          return true;
+        }
+      }
+      return false;
+    }
+    
+    function c4CheckDraw() {
+      return c4Board[0].every(cell => cell !== 0);
+    }
+    
+    function c4AIMove() {
+      if (c4GameOver) return;
+      
+      // Check if AI can win
+      for (let c = 0; c < COLS; c++) {
+        const r = c4GetLowestRow(c);
+        if (r !== -1) {
+          c4Board[r][c] = 2;
+          if (c4CheckWinNoHighlight(r, c, 2)) {
+            c4Board[r][c] = 0;
+            c4DropPieceAI(c);
+            return;
+          }
+          c4Board[r][c] = 0;
+        }
+      }
+      
+      // Block player from winning
+      for (let c = 0; c < COLS; c++) {
+        const r = c4GetLowestRow(c);
+        if (r !== -1) {
+          c4Board[r][c] = 1;
+          if (c4CheckWinNoHighlight(r, c, 1)) {
+            c4Board[r][c] = 0;
+            c4DropPieceAI(c);
+            return;
+          }
+          c4Board[r][c] = 0;
+        }
+      }
+      
+      // Prefer center column
+      if (c4GetLowestRow(3) !== -1) {
+        c4DropPieceAI(3);
+        return;
+      }
+      
+      // Random valid move
+      const validCols = [];
+      for (let c = 0; c < COLS; c++) {
+        if (c4GetLowestRow(c) !== -1) validCols.push(c);
+      }
+      if (validCols.length > 0) {
+        c4DropPieceAI(validCols[Math.floor(Math.random() * validCols.length)]);
+      }
+    }
+    
+    function c4DropPieceAI(col) {
+      const row = c4GetLowestRow(col);
+      if (row === -1) return;
+      
+      c4PlacePiece(row, col, 2);
+      
+      if (c4CheckWin(row, col, 2)) {
+        c4GameOver = true;
+        document.getElementById('c4Message').textContent = `${c4Pieces[2]} (AI) WINS! 🤖`;
+        c4P2Wins++;
+        document.getElementById('c4P2Wins').textContent = c4P2Wins;
+        return;
+      }
+      
+      if (c4CheckDraw()) {
+        c4GameOver = true;
+        c4Draws++;
+        document.getElementById('c4Draws').textContent = c4Draws;
+        document.getElementById('c4Message').textContent = "It's a draw! 🤝";
+        return;
+      }
+      
+      c4CurrentPlayer = 1;
+      document.getElementById('c4Turn').textContent = c4Pieces[1];
+      document.getElementById('c4Message').textContent = `${c4Pieces[1]}'s turn!`;
+    }
+    
+    function c4CheckWinNoHighlight(row, col, player) {
+      const directions = [
+        [[0, 1], [0, -1]],
+        [[1, 0], [-1, 0]],
+        [[1, 1], [-1, -1]],
+        [[1, -1], [-1, 1]]
+      ];
+      
+      for (const [dir1, dir2] of directions) {
+        let count = 1;
+        for (const [dr, dc] of [dir1, dir2]) {
+          let r = row + dr;
+          let c = col + dc;
+          while (r >= 0 && r < ROWS && c >= 0 && c < COLS && c4Board[r][c] === player) {
+            count++;
+            r += dr;
+            c += dc;
+          }
+        }
+        if (count >= 4) return true;
+      }
+      return false;
+    }
+    
+    function resetC4() {
+      initC4Board();
+    }
+    
+    function toggleAI() {
+      c4VsAI = !c4VsAI;
+      const btn = document.getElementById('c4AiBtn');
+      btn.textContent = c4VsAI ? '🤖 vs AI: ON' : '🤖 vs AI: OFF';
+      btn.classList.toggle('active', c4VsAI);
+      initC4Board();
+    }
+    
+    // Initialize Connect 4 on load
+    initC4Board();
   </script>
 </body>
 </html>
